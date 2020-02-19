@@ -23,6 +23,7 @@ The sample programs in the repository show some basic functions of Gravbox, and 
 - DeflectorTest.grv - Tests the deflection capabilities, see the language spec for more details on how they should work
 - HelloWorld.grv - Prints out Hello, World
 - input.grv - Takes in input, and prints it out
+- HelloWorldMultiple.grv - Prints out Hello, World, but uses multiple balls to do so
 
 In addition, several of these programs can be found on the IDE, and can be loaded and ran from there 
  
