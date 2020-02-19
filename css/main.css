@@ -1,0 +1,468 @@
+/* the styles for the elements */
+html{
+	height:100%;
+}
+#test, #intro, #end {
+	width:100%;
+	height:100%;
+	opacity:.95;
+	top:0;
+	left:0;
+	display:none;
+	position:fixed;
+	background-color:#313131;
+	overflow:auto
+}
+button#close {
+	font-size:100%;
+	border-radius:25px;
+	color: white;
+	position:absolute;
+	right:25%;
+	bottom:-50px;
+	cursor:pointer;
+	background-color: black;
+	border: 2px solid #d6b600
+}
+
+button#battlebutton{
+	font-size:100%;
+	border-radius:25px;
+	color: white;
+	position:absolute;
+	right:0px;
+	bottom:-50px;
+	cursor:pointer;
+	background-color: black;
+	border: 2px solid #d6b600;
+	padding: 5px;
+}
+
+h3#signature{
+	text-align:right;
+}
+
+ul#reportlist{
+	padding-left:125px;
+}
+
+div#playerselectpopup, div#intropopup, div#endingStats {
+	background-color:black;
+	color:white;
+	position: absolute;
+	padding:10px;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	font-family:'Raleway',sans-serif;
+	border: 2px solid #d6b600
+}
+
+h2#end{
+	text-align: center;
+}
+
+h2#VS{
+	text-align:right;
+	padding-right:10%;
+}
+
+table#statTable{
+	
+	border: 5px solid black;
+	background-color:white;
+}
+table#statTable td{
+	width: 148px;
+	border: 1px solid black;
+	text-align:center;
+	padding:10px;
+}
+
+td#rowheader{
+	width:10px !important;
+}
+img.sand{
+	display: block;
+	margin: 0 auto;
+	width: 500px;
+	float:none;
+}
+
+a:focus, a:hover{font-style: italic}
+
+.name{
+	font-size: 150%;
+	text-shadow: 2px 2px 2px #cccbc9;
+}
+
+.submit{
+	border-radius: 10px;
+	border-color: gold;
+	background-color: black;
+}
+
+input[type=text]{
+	background-color: #303030;
+	color: white;
+	border-color:black;
+}
+select[class="dropdown"]{
+	background-color: #303030;
+	color: white;
+	border-color:black;
+}
+input[type=password]{
+	background-color: #303030;
+	color: white;
+	border-color:black;
+}
+input[type=submit]{
+	background-color: #303030;
+	color: white;
+	border-color:black;
+}
+input[type=file]{
+	background-color: #303030;
+	color: white;
+	border-color:black;
+}
+textarea{
+	background-color: #303030;
+	color: white;
+	border-color:black;
+	resize: none;
+}
+.contactForm:focus{
+	color: black;
+	background-color:white;
+}
+
+form{
+	text-align: center;
+	color: white;
+}
+#emailInput{
+	width:30%;
+}
+
+#addAcc{
+	color:white;
+	float:right;
+}
+table.leader{
+	border: 1px solid black;
+	//border-collapse: separate;
+	border-spacing: 4;
+	display: inline-block;
+}
+#scoreMit{
+	padding:5px;
+}
+td#LeaderEntry{
+	padding: 8px;
+}
+#modifyRecord{
+	color:white;
+	float:right;
+}
+
+#p1text{
+	text-align:left;
+}
+#p2text{
+	text-align:right;
+}
+
+a{
+	color: black;
+}
+
+p{
+font-size: 100%;
+color: white;	
+}
+footer{
+   text-align: center;
+   position:fixed;
+   bottom:0;
+   width:100%;
+   height:60px;   /* Height of the footer */
+   background:#d6b600;
+}
+button.dropbtn{
+	background-color: transparent;
+	border-color: white;
+}
+.dropcont{
+	display: none;
+	position: absolute;
+	min-width: 150px;
+	background: white;
+	border-style: solid;
+}
+.dropdown{
+	position: relative;
+	text-align: center;
+	display: inline-block;
+	color: black;
+}
+.dropcont a{
+	width: max-content;
+	display:block;
+}
+.dropdown:hover .dropcont{
+		display:block;
+}
+button#restart{
+	color: black; 
+	display: block;
+    width: 100%;
+    border: none;
+    background-color: gold;
+    padding: 14px 28px;
+    font-size: 16px;
+    cursor: pointer;
+    text-align: center;
+}
+
+p#leftpoptext{
+	float:left;
+	padding-top:100px;
+	padding-left: 75px;
+	padding-right:15px;
+}
+
+p#rightpoptext{
+	float:right;
+	padding-top:100px;
+	padding-right: 75px;
+}
+
+p#leftpopdisplay{
+	padding-top:100px;
+	float: left;
+}
+
+p#rightpopdisplay{
+	padding-top:100px;
+	float:right;
+	padding-right: 15px;
+}
+
+.kode{
+	margin-top: 0px;
+}
+
+.maps{
+	display: table;
+	margin: 0;
+}
+.menu{
+	text-align: center;
+	margin-top: 0px;
+	height: 200px;
+}
+
+.border{
+	border-image: url("http://www.freeiconspng.com/uploads/csgo-icon-6.png") 4 round;
+}
+
+li {
+	font-size: 125%;
+	color: gold;
+}
+
+body {
+	font-family: Tunes New Roman, Times, serif;
+	/*font-family: Courier New, Courier, monospace;*/
+    font-size: 100%;
+	/*background-image: url("/images/Background.jpg");*/
+	background: radial-gradient(grey, #36454F) fixed;
+}
+
+/* the styles for the header */
+/*body img {
+	display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+*/
+header h1{
+	margin: 0 !important;
+	border: 0;
+	padding: 10px;
+	background: #d6b600;
+	border-style: solid;
+	border-bottom-width: 5px;
+	font-size: 200%;
+	color: black;
+	text-align: center;
+}
+
+header h2{
+	font-size: 170%;
+	color: white;
+	text-indent: 30px;
+}
+header h3{
+	font-size: 130%;
+	font-style: italic;
+	text-indent: 30px;
+}
+header h4{
+	text-align: center;
+}
+
+/* the styles for the section */
+main {
+	clear: left;
+	margin: 50px;
+}
+main img{
+	float: left;
+}
+.para{
+	font-size: 150%;
+	text-indent:50px;
+	color: #e4e2e5;
+}
+
+.login{
+	float: right;
+	margin-right: 10px;
+	//background-color: grey;
+}
+
+main h1{
+	//text-align: center;
+	font-size: 150%;
+	color: white;
+}
+main h2{
+	font-size: 150%;
+	color: white;
+}
+main h3{
+	font-size: 105%;
+}
+/*the styles for the admin page*/
+#user-list{
+	color:white;
+}
+
+#AdminPage{
+	column-count: 3;
+}
+
+.adminColumn{
+	float:left;
+	width:75%;
+}
+
+.adminRow{
+	content: "";
+	display: table;
+	clear: both;
+}
+
+th{
+	text-align: center;
+	background-color: grey;
+	color: white;
+	font-size: 20px;
+}
+
+div#cont{
+	text-align:center;	
+}
+div#stat, div#leader{
+	background: #D6B600;
+	text-align:center;
+	margin: 0 auto;
+	width: 506px;
+}
+canvas{
+	border-style: solid;
+	border-color: #D6B600;
+}
+tr:nth-child(even){background-color: #ffd900}
+
+/* styles for Gravbox project */
+#ide{
+	width:100%;
+}
+#left_half{
+	float:left;
+	width:42%;
+}
+#right_half{
+	float:right;
+	width:56%;
+}
+#code_grid{
+	float:left;
+	background-color:black;
+	color:white;
+	width:100%;
+	resize:none;
+	font-size:15px;
+}
+#toolbar{
+	background-color:#2b2c33;
+	width: 100%;
+	float:top left;
+}
+#grid_display{
+	float:left;
+	width:60%;
+	height: 450px;
+	background: grey;
+	border: 1px solid #303030;
+	font-size:15px;
+}
+#code_output{
+	float:left;
+	width:60%;
+	background: grey;
+	border: 1px solid #303030;
+}
+#code_input{
+	width:55%;
+	height: 150px;
+}
+#grid_display_inner{
+	color:white;
+}
+#code_output_inner{
+	color:white;
+	font-size:20px;
+}
+#input-area{
+	display:inline-block;
+	width:100%;
+}
+#reference{
+	background:#9ea5b0;
+	float:right;
+	border: 1px solid gray;
+	width:37%;
+	color:white;
+}
+.ref-row:nth-child(even){
+	background:#55595e;
+}
+.ref-row{
+	color:white;
+}
+/*table, td{
+	border: 1px solid black;
+	font-size: 15px;
+	width: 35%;
+	background-color: #e5e4e2;
+	color: black;
+}
+*/
+
+
+/* the styles for the footer */

@@ -14,9 +14,9 @@ var paths = [];
 var stack = '';
 var sample_programs = {'beer':" @          ^ +-01        .......   @\n  ' @ @      @@                             @.......   ...@\n  6 .        @ .....................@       &             .\n  5  @ ....... .....on*48the*48wall*4+65*48   @           .\n  + %@@       .                              @@           .\n  9 ^         .                            %            @@.\n  * ;         .                            @25*dnuora4   @.\n  ^    @@ @@ @ *25Take*48one*48down*4+65*48pass*48it*8   @.\n~&; 0  @   @ @@                                         @@.\n     ///  \n  @1  @   @  48*reeb48*fo48*selttob48*                    @\n    @@",
 	'forloop': " @'+   @\n  2    -\n  5    0 \n  *    1\n~&^    .\n  @;25*@",
-	'hello':" '\n @92+3*dlroW84*92+4*olleH..............~",
-	'factorial':"\n @     +@\n &\n '      -\n%1      0\n ,      1\n &      ^\n  @     @\n @.  @\n/\n   \n &   *\n~ *  5\n  &\n ~ ^ 2\n   @;@"}
-
+	'hello':"'\n@92+3*dlroW84*92+4*olleH..............~",
+	'factorial':" @     +@\n &\n '      -\n%1      0\n ,      1\n &      ^\n  @     @\n @.  @\n/\n   \n &   *\n~ *  5\n  &\n ~ ^ 2\n   @;@"}
+var test = 1;
 function init(){
 	document.getElementById('input-area').value = '';
 	document.getElementById('stop-button').disabled = true;
@@ -57,9 +57,8 @@ function compile(asStage,st=''){
 		document.getElementById('resume-button').disabled = true;
 	}
 	const xhr = new XMLHttpRequest();
-	var url = 'https://platinumherring.com/app/gravbox';
+	var url = 'http://127.0.0.1:5000/app/gravbox';
 	xhr.open("POST",url,true);
-	//xhr.withCredentials=true;
 	data = JSON.stringify({
 		'code':code,
 		'stack':st,
@@ -68,7 +67,6 @@ function compile(asStage,st=''){
 		'step':start_step});
 	//console.log(data);
 	xhr.setRequestHeader('Content-Type','application/json');
-	console.log(xhr);
 	xhr.send(data);
 	xhr.onreadystatechange = function (){
 		if (xhr.readyState === 4 && xhr.status === 200){
@@ -119,7 +117,7 @@ function run(){
 	if(interval == 0 || interval > max_steps){
 		curr_step = max_steps;
 	}
-	intervalID = setInterval(function(){run_step();},1000);
+	intervalID = setInterval(function(){run_step();},500);
 	waiting_for_input = false;
 }
 function run_step(){
