@@ -26,6 +26,7 @@ class Ball:
                 Ball.to_move.remove(self)
                 grid.move_ball(self,coords(self.x,self.y))
         else:
+            #print('moved')
             Ball.to_move.remove(self)
             self.move(target,stack,grid)
 
@@ -33,6 +34,7 @@ class Ball:
         try: 
             cell_str = grid.cell_at(target)
             grid.move_ball(self,target)
+            Ball.moved.append(self)
             if cell_str.isalpha():
                 push(stack,cell_str)
             elif cell_str.isdigit():
@@ -59,7 +61,7 @@ class Ball:
                 self.direction = random.choice([1,3])
                 return
             elif cell_str == ',':
-                if grid.input_pause:
+                if grid.run_by_flask:
                     raise InputReachedException
                 val = input()
                 if val.isdigit():
@@ -70,7 +72,7 @@ class Ball:
                 val = pop(stack)
                 if type(val) == int:
                     val = chr(val)
-                if grid.input_pause:
+                if grid.run_by_flask:
                     if step in grid.output:
                         grid.output[step] += val
                     else:
@@ -100,16 +102,13 @@ class Ball:
                 val = pop(stack)
                 if type(val) == str:
                     val = ord(val[0])
-                if grid.input_pause:
+                if grid.run_by_flask:
                     if step in grid.output:
                         grid.output[step] += str(val)
                     else:
                         grid.output[step] = str(val)
                 else:
                     print(val,end='')
-            #Debugging tool, change later
-            elif cell_str == '{':
-                print(stack)
             self.direction = Ball.direction
         except TypeError as e:
             print(str(e))
@@ -139,12 +138,12 @@ class Ball:
         return "Ball({0}, {1})".format(self.x,self.y)
 
 class Grid:
-    def __init__(self,code,input_pause=False):
+    def __init__(self,code,run_by_flask=False):
         self.cells = []
         code = code.split('\n')
         i = 0
         self.height = len(code)
-        self.input_pause = input_pause
+        self.run_by_flask = run_by_flask
         self.output = {}
         while i < self.height:
             self.cells.append([])
@@ -171,7 +170,6 @@ class Grid:
     def move_ball(self,ball,coords):
         ball.x,ball.y = x(coords),y(coords)
         ball.path.append([ball.x,ball.y])
-        Ball.moved.append(ball)        
 
     def copy_cells(self):
         new_cells = []
@@ -184,7 +182,7 @@ class Grid:
 
     def __str__(self):
         output = self.copy_cells()
-        if not self.input_pause:
+        if not self.run_by_flask:
             for ball in Ball.balls:
                 output[ball.y][ball.x] = "'"
         return "\n".join(["".join([char[-1:] for char in line]) for line in output])
@@ -201,8 +199,8 @@ def get_target(ball,grid):
 
 def execute_loop(grid,stack):
     height,width = grid.height,grid.width
-    Ball.moved = []
     Ball.to_move = order_balls(Ball.balls,Ball.direction)
+    Ball.moved = []
     def execute_helper(grid,stack):
         i = 0
         while i < len(Ball.to_move):
@@ -210,6 +208,7 @@ def execute_loop(grid,stack):
             curr_ball.attempt_move(stack,grid)
             if curr_ball in Ball.to_move:
                 i += 1
+
         if not Ball.moved:
             raise ProgramFinishedException()
         if Ball.to_move:
@@ -234,14 +233,14 @@ def order_balls(balls,direction):
     max_sec_dim = max(balls,key = lambda ball: pair_order(ball.x,ball.y)[1])
     return sorted(balls, key = lambda ball: pair_order(ball.x,ball.y),reverse=reverse)
 
-def run_program(code,verbose = False,interval=0,st=None,input_pause = False,balls = None,direction = 2,start_step = 0):
+def run_program(code,verbose = False,interval=0,st=None,run_by_flask = False,balls = None,direction = 2,start_step = 0):
     try:
         Ball.balls = []
         if balls:
             for ball in balls:
                 Ball(ball[0],ball[1])
         Ball.direction = direction
-        grid = Grid(code,input_pause)
+        grid = Grid(code,run_by_flask)
         if not st:
             st = stack()
         global step
@@ -258,12 +257,12 @@ def run_program(code,verbose = False,interval=0,st=None,input_pause = False,ball
     except InputReachedException:
         return {'paths':[ball.path for ball in Ball.balls],'stack':st,'status':0,'state':str(grid),'output':grid.output,'direction':Ball.direction,'steps':step+1}
     except ProgramFinishedException:
-        if not input_pause:
+        if not run_by_flask:
             print('\nProgram finished.')
             return str(grid)
         return {'paths':[ball.path for ball in Ball.balls],'stack':st,'status':1,'state':str(grid),'output':grid.output,'direction':Ball.direction,'steps':step}
     except GravException as e:
-        if not input_pause:
+        if not run_by_flask:
             print("Error: "+str(e))
             print("Program state at time of error:")
             print(grid)
