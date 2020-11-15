@@ -1,13 +1,13 @@
-import requests,json,gravbox
+import requests,json,gravbox,os
 from flask import Flask,request
 from flask_cors import CORS, cross_origin
 
 app = Flask(__name__)
-cors = CORS(app)
-app.config['CORS_HEADERS'] = 'Content-Type'
 
-@app.route('/app/gravbox',methods=['POST'])
-@cross_origin()
+for fname in os.listdir('samples'):
+    print(fname)
+
+@app.route('/app/compile',methods=['POST'])
 def compile_program():
     req_data = request.get_json()
     code = req_data['code']
@@ -18,6 +18,11 @@ def compile_program():
     step = req_data['step']
     result = gravbox.run_program(code,st = stack, input_pause = True,balls = balls,direction = direction,start_step=step)
     return result
+
+@app.route('/app/sample',methods=['POST'])
+def sample_program():
+    req_data = request.get_json()
+    name = req_data['name']
 
 if __name__ == '__main__':
     app.run(debug=True,port=5000)
