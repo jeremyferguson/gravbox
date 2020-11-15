@@ -3,13 +3,11 @@ from flask import Flask,request
 from flask_cors import CORS, cross_origin
 
 app = Flask(__name__)
-cors = CORS(app)
-app.config['CORS_HEADERS'] = 'Content-Type'
 
-@app.route('/app/gravbox',methods=['POST'])
-@cross_origin()
+@app.route('/api/gravbox',methods=['POST'])
 def compile_program():
     req_data = request.get_json()
+    print(req_data)
     code = req_data['code']
     stack = req_data['stack']
     balls = req_data['balls']
