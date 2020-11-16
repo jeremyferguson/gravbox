@@ -1,11 +1,14 @@
 import requests,json,gravbox,os
 from flask import Flask,request
-from flask_cors import CORS, cross_origin
 
 app = Flask(__name__)
-
-for fname in os.listdir('samples'):
-    print(fname)
+path = os.path.dirname(os.path.realpath(__file__))
+path += "/../samples/"
+samples = {}
+for fname in os.listdir(path):
+    with open(path + fname, 'r') as f:
+        text = f.read()
+        samples[fname[:-4]] = text
 
 @app.route('/app/compile',methods=['POST'])
 def compile_program():
@@ -21,8 +24,22 @@ def compile_program():
 
 @app.route('/app/sample',methods=['POST'])
 def sample_program():
-    req_data = request.get_json()
-    name = req_data['name']
+    try:
+        if request.method == "POST":
+            req_data = request.get_json()
+            if req_data:
+                name = req_data['name']
+                if name in samples:
+                    response = {'code':samples[name]}
+                else:
+                    response = {'message':'name not in samples'}
+            else:
+                response = {'message':'Invalid request data'}
+        else:
+            response = {'message':'invalid request header'}
+    except Exception as e:
+        response = {'message':'error processing request: '+str(e)}
+    return response
 
 if __name__ == '__main__':
     app.run(debug=True,port=5000)
