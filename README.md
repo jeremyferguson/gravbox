@@ -9,7 +9,7 @@ The interpreter can be run in any version of Python 3, with command line argumen
 - v: verbose, prints debugging output as it runs
 - s: interval of frames to print out, allows to see intermediate stages of program as it runs
 
-The web IDE is built using a Flask back-end and React front-end.  To run the IDE, run `yarn start-api` in one terminal window and `yarn start` in another to open the IDE in a web browser.
+The web IDE is built using a Flask back-end and React front-end.  To run the IDE, run `yarn start-api` in one terminal window and `yarn start` in another to open the IDE in a web browser. There is also a pure Javascript version of the front end, which can be run by opening `grav_basic.html` in a web browser and running the flask backend by `yarn start-api`
 
 ## Sample programs
 The sample programs in the repository show some basic functions of Gravbox, and can be run through the command line
