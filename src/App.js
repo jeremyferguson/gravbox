@@ -1,10 +1,42 @@
 import React, { useState, useEffect } from 'react';
 import logo from './logo.svg';
 import './App.css';
+class InputCell extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {ch: ''};
+        this.grid = props.grid;
+        this.handleChange = this.handleChange.bind(this);
+    }
+    handleChange(event) {
+        this.setState({ch:event.target.value});
+    }
+    render() {
+        return (
+            <input className = "inputCell" onChange = {this.handleChange}/>
+        );
+    }
+}
+class Grid extends React.Component {
+    constructor(props) {
+        super(props);
+        this.height = props.height;
+        this.width = props.width;
+    }
+    render() {
+        return (
+            {for (var i = 0; i < this.height; i ++ ) {
+                for (var j = 0; j < this.width; j ++) {
+                    <InputCell grid={this} />
+                }
+            }
+            }
+        );
+}
 class Selecter extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {code: ''}
+        this.state = {code: ''};
         this.handleChange = this.handleChange.bind(this);
     }
 
@@ -15,7 +47,7 @@ class Selecter extends React.Component {
             headers: {'content_type':'application/json' },
             body: JSON.stringify({ name: event.target.value})
         };
-        fetch('/app/sample',requestOptions).then(res => res.json()).then(data => {
+        fetch('/app/sample',requestOptions).then(res => res.json()).then(data => 	{
             this.setState({code: data});
         });
     }
@@ -37,6 +69,7 @@ function App() {
     <div className="App">
       <header className="App-header">
           <Selecter />
+          <Grid height = "20" width = "20"/> 
       </header>
     </div>
   );
